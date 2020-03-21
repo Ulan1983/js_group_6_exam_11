@@ -29,13 +29,32 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
 	try {
-		const item = await Item.findById(req.params.id).populate('category');
+		const item = await Item.findById(req.params.id).populate({
+			path: 'category',
+			populate: {
+				path: 'user'
+			}
+		});
 
 		if (!item) {
 			return res.status(404).send({message: 'Not found'});
 		}
 
-		res.send(item);
+		return res.send(item);
+	} catch (e) {
+		res.status(404).send({message: 'Not found'});
+	}
+});
+
+router.get('/:id', async (req, res) => {
+	try {
+		const items = await Item.find({category: req.params.id});
+
+		if (!items) {
+			return res.status(404).send({message: 'Not found'});
+		}
+
+		return res.send(items);
 	} catch (e) {
 		res.status(404).send({message: 'Not found'});
 	}
@@ -74,6 +93,23 @@ router.post('/', upload.single('image'), auth, async (req, res) => {
 		return res.send(item);
 	} catch (e) {
 		return res.status(400).send(e);
+	}
+});
+
+router.delete('/:id', auth, async (req, res) => {
+	const user = req.user;
+
+	try {
+		const item = await Item.findOne({_id: req.params.id});
+
+		if (!item) {
+			return res.status(403).send({message: 'This user can not delete this item!'});
+		}
+		await Item.remove({_id: req.params.id});
+
+		return res.send({message: 'Item has been deleted succesfully!'});
+	} catch (e) {
+		return res.status(500).send(e);
 	}
 });
 

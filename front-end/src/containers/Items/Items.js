@@ -1,11 +1,19 @@
 import React, {Component, Fragment} from 'react';
 import ItemList from "../../components/ItemList/ItemList";
 import {connect} from "react-redux";
-import {fetchItems} from "../../store/actions/itemsActions";
+import {fetchCategoryItems, fetchItems} from "../../store/actions/itemsActions";
+import {fetchCategories} from "../../store/actions/categoriesActions";
 
 class Posts extends Component {
 	componentDidMount() {
 		this.props.fetchItems();
+		this.props.fetchCategories();
+	}
+
+	componentDidUpdate(prevProps, prevState, snapshot) {
+		if (prevProps.match.params.id !== this.props.match.params.id) {
+			this.props.fetchCategoryItems(this.props.match.params.id);
+		}
 	}
 
 	render() {
@@ -27,11 +35,14 @@ class Posts extends Component {
 
 const mapStateToProps = state => ({
 	items: state.items.items,
-	error: state.items.itemsError
+	error: state.items.itemsError,
+	categories: state.categories.categories
 });
 
 const mapDispatchToProps = dispatch => ({
-	fetchItems: () => dispatch(fetchItems())
+	fetchItems: () => dispatch(fetchItems()),
+	fetchCategories: () => dispatch(fetchCategories()),
+	fetchCategoryItems: id => dispatch(fetchCategoryItems(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);

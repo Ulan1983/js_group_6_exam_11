@@ -1,5 +1,5 @@
 import {
-	CREATE_ITEM_FAILURE,
+	CREATE_ITEM_FAILURE, FETCH_CATEGORY_ITEMS_FAILURE, FETCH_CATEGORY_ITEMS_SUCCESS,
 	FETCH_ITEM_FAILURE,
 	FETCH_ITEM_SUCCESS,
 	FETCH_ITEMS_FAILURE,
@@ -11,7 +11,8 @@ const initialState = {
 	itemsError: null,
 	item: null,
 	itemError: null,
-	createItemError: null
+	createItemError: null,
+	categoryItemsError: null
 };
 
 const itemsReducer = (state = initialState, action) => {
@@ -26,6 +27,10 @@ const itemsReducer = (state = initialState, action) => {
 			return {...state, itemError: action.error};
 		case CREATE_ITEM_FAILURE:
 			return {...state, createItemError: action.error};
+		case FETCH_CATEGORY_ITEMS_SUCCESS:
+			return {...state, items: action.items};
+		case FETCH_CATEGORY_ITEMS_FAILURE:
+			return {...state, categoryItemsError: action.error};
 		default:
 			return state;
 	}

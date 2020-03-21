@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
-import {fetchItem} from "../../store/actions/itemsActions";
+import {deleteItem, fetchItem} from "../../store/actions/itemsActions";
 import {connect} from "react-redux";
-import {Card, CardBody, CardText} from "reactstrap";
+import {Button, Card, CardBody, CardText} from "reactstrap";
 import ItemThumbnail from "../../components/ItemThumbnail/ItemThumbnail";
 
 class SingleItem extends Component {
 	componentDidMount() {
 		this.props.fetchItem(this.props.match.params.id);
 	}
+
 
 	render() {
 		if (!this.props.item) return null;
@@ -29,12 +30,21 @@ class SingleItem extends Component {
 					</CardText>
 					<CardText>
 						<strong>ФИО продавца: </strong>
-						{this.props.user.displayName}
+						{this.props.item.user.displayName}
 					</CardText>
 					<CardText>
 						<strong>Номер телефона продавца: </strong>
-						{this.props.user.phone}
+						{this.props.item.user.phone}
 					</CardText>
+					{this.props.user ?
+						<Button
+							type='submit'
+							color='primary'
+							onClick={() => this.props.deleteItem(this.props.item._id)}
+						>
+							Удалить товар
+						</Button>
+					: null }
 				</CardBody>
 			</Card>
 		);
@@ -48,7 +58,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-	fetchItem: id => dispatch(fetchItem(id))
+	fetchItem: id => dispatch(fetchItem(id)),
+	deleteItem: id => dispatch(deleteItem(id))
 });
 
 
