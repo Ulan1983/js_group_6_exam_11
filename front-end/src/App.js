@@ -5,6 +5,8 @@ import {Container} from "reactstrap";
 import {Route, Switch} from "react-router-dom";
 import Register from "./containers/Register/Register";
 import Login from "./containers/Login/Login";
+import Items from "./containers/Items/Items";
+import NewItem from "./containers/NewItem/NewItem";
 
 function App() {
   return (
@@ -14,8 +16,10 @@ function App() {
         </header>
         <Container style={{marginTop: '20px'}}>
           <Switch>
-            <Route path='/register' exact component={Register} />
-            <Route path='/login' exact component={Login} />
+              <Route path='/' exact component={Items} />
+              <Route path='/item/new' exact component={NewItem} />
+              <Route path='/register' exact component={Register} />
+              <Route path='/login' exact component={Login} />
           </Switch>
         </Container>
       </Fragment>

@@ -48,21 +48,21 @@ router.post('/', upload.single('image'), auth, async (req, res) => {
 		itemData.image = req.file.filename;
 	}
 
-	if (itemData.title.length <= 2) {
-		return res.status(400).send({error: 'Please add not less then 3 symbols of title!'});
-	}
-
-	if (itemData.description.length <= 4) {
-		return res.status(400).send({error: 'Please add not less then 5 symbols of description!'});
-	}
-
-	if (itemData.price < 0) {
-		return res.status(400).send({error: 'Please add correct price!'});
-	}
-
-	if (!itemData.image) {
-		return res.status(400).send({error: 'Please add image!'});
-	}
+	// if (itemData.title.length <= 2) {
+	// 	return res.status(400).send({error: 'Please add not less then 3 symbols of title!'});
+	// }
+	//
+	// if (itemData.description.length <= 4) {
+	// 	return res.status(400).send({error: 'Please add not less then 5 symbols of description!'});
+	// }
+	//
+	// if (itemData.price < 0) {
+	// 	return res.status(400).send({error: 'Please add correct price!'});
+	// }
+	//
+	// if (!itemData.image) {
+	// 	return res.status(400).send({error: 'Please add image!'});
+	// }
 
 	itemData.user = req.user._id;
 

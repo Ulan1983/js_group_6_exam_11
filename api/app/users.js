@@ -34,7 +34,7 @@ router.post('/sessions', async (req, res) => {
 
 	await user.save();
 
-	return res.send(user.displayName);
+	return res.send(user.username);
 });
 
 router.delete('/sessions', async (req, res) => {
