@@ -1,9 +1,12 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+
 const config = require('./config');
 
 const users = require('./app/users');
+const categories = require('./app/categories');
+const items = require('./app/items');
 
 const app = express();
 const port = 8000;
@@ -16,6 +19,8 @@ const run = async () => {
 	await mongoose.connect(config.database, config.databaseOptions);
 
 	app.use('/users', users);
+	app.use('/categories', categories);
+	app.use('/items', items);
 
 
 	app.listen(port, () => {
