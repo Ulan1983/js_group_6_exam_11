@@ -31,7 +31,7 @@ const run = async () => {
 
 	const [cat1, cat2, cat3] = await Category.create({
 		title: 'TV',
-		description: 'Computers and laptops'
+		description: 'TV models'
 	}, {
 		title: 'Cars',
 		description: 'All models of cars'
