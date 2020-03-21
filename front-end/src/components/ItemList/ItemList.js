@@ -8,7 +8,7 @@ const ItemList = props => {
 		<Card style={{marginTop: '10px'}}>
 			<CardBody>
 				<ItemThumbnail image={props.image}/>
-				<Link to={'/posts/' + props.id}>
+				<Link to={'/items/' + props.id}>
 					{props.title}
 				</Link>
 				<CardText style={{marginTop: '10px'}}>

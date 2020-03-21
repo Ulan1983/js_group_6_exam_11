@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
 	try {
-		const item = await Item.findById(req.params.id);
+		const item = await Item.findById(req.params.id).populate('category');
 
 		if (!item) {
 			return res.status(404).send({message: 'Not found'});

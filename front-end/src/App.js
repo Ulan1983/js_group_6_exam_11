@@ -7,6 +7,7 @@ import Register from "./containers/Register/Register";
 import Login from "./containers/Login/Login";
 import Items from "./containers/Items/Items";
 import NewItem from "./containers/NewItem/NewItem";
+import SingleItem from "./containers/SingleItem/SingleItem";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Container style={{marginTop: '20px'}}>
           <Switch>
               <Route path='/' exact component={Items} />
+              <Route path='/items/:id' exact component={SingleItem} />
               <Route path='/item/new' exact component={NewItem} />
               <Route path='/register' exact component={Register} />
               <Route path='/login' exact component={Login} />
