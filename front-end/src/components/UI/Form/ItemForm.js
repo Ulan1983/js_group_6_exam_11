@@ -53,6 +53,7 @@ class ItemForm extends Component {
 								placeholder="Enter title"
 								value={this.state.title}
 								onChange={this.inputChangeHandler}
+								required
 							/>
 						</Col>
 					</FormGroup>
@@ -65,6 +66,7 @@ class ItemForm extends Component {
 								placeholder="Enter description"
 								value={this.state.description}
 								onChange={this.inputChangeHandler}
+								required
 							/>
 						</Col>
 					</FormGroup>
@@ -77,6 +79,7 @@ class ItemForm extends Component {
 								placeholder="Enter price"
 								value={this.state.price}
 								onChange={this.inputChangeHandler}
+								required
 							/>
 						</Col>
 					</FormGroup>
@@ -87,6 +90,7 @@ class ItemForm extends Component {
 								type="file"
 								name="image" id="image"
 								onChange={this.fileChangeHandler}
+								required
 							/>
 						</Col>
 					</FormGroup>
@@ -98,6 +102,7 @@ class ItemForm extends Component {
 								name="category" id="category"
 								value={this.state.category}
 								onChange={this.inputChangeHandler}
+								required
 							>
 								<option value="">Please select a category...</option>
 								{this.props.categories.map(category => (

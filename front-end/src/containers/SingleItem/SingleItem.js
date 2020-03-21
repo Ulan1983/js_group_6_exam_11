@@ -54,7 +54,7 @@ class SingleItem extends Component {
 const mapStateToProps = state => ({
 	item: state.items.item,
 	error: state.items.itemError,
-	user: state.users.user
+	user: state.users.user,
 });
 
 const mapDispatchToProps = dispatch => ({

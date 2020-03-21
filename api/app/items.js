@@ -29,12 +29,8 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
 	try {
-		const item = await Item.findById(req.params.id).populate({
-			path: 'category',
-			populate: {
-				path: 'user'
-			}
-		});
+		const item = await Item.findById(req.params.id).populate('user').populate('category');
+
 
 		if (!item) {
 			return res.status(404).send({message: 'Not found'});
@@ -66,22 +62,6 @@ router.post('/', upload.single('image'), auth, async (req, res) => {
 	if (req.file) {
 		itemData.image = req.file.filename;
 	}
-
-	// if (itemData.title.length <= 2) {
-	// 	return res.status(400).send({error: 'Please add not less then 3 symbols of title!'});
-	// }
-	//
-	// if (itemData.description.length <= 4) {
-	// 	return res.status(400).send({error: 'Please add not less then 5 symbols of description!'});
-	// }
-	//
-	// if (itemData.price < 0) {
-	// 	return res.status(400).send({error: 'Please add correct price!'});
-	// }
-	//
-	// if (!itemData.image) {
-	// 	return res.status(400).send({error: 'Please add image!'});
-	// }
 
 	itemData.user = req.user._id;
 
